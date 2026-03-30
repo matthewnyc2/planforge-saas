@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ethereal Architect — deep purple + teal */
+    --background: 280 60% 99.4%;        /* #fdf7ff */
+    --foreground: 264 100% 10%;          /* near-black purple */
+    --card: 280 40% 99%;                 /* surface_container_lowest */
+    --card-foreground: 264 100% 10%;
+    --popover: 280 60% 99.4%;
+    --popover-foreground: 264 100% 10%;
+    --primary: 267 100% 35%;             /* #4800b2 */
+    --primary-foreground: 280 60% 99.4%;
+    --secondary: 192 100% 25%;           /* #00677f teal */
+    --secondary-foreground: 280 60% 99.4%;
+    --muted: 270 20% 95%;
+    --muted-foreground: 264 10% 46%;
+    --accent: 270 30% 94%;
+    --accent-foreground: 264 100% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 15% 85%;              /* ghost border base */
+    --input: 270 15% 90%;
+    --ring: 267 100% 35%;
+    --radius: 0.5rem;
+
+    /* Design system tokens */
+    --surface: 280 60% 99.4%;
+    --surface-container: 270 20% 97%;
+    --outline-variant: 270 15% 82%;      /* #cbc3d9 */
+    --gradient-start: #4800b2;
+    --gradient-end: #6200ee;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--outline-variant) / 0.15);
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: hsl(var(--surface) / 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  .glass-card {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  }
+  .ghost-border {
+    border: 1px solid hsl(var(--outline-variant) / 0.15);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
