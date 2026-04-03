@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PlanForge | Organize Projects, Execute With Clarity</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#002113",
+                      "on-surface-variant": "#444653",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#d9e3f7",
+                      "secondary": "#006c49",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#00714d",
+                      "secondary-container": "#6cf8bb",
+                      "on-tertiary-fixed-variant": "#802a00",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#005236",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-background": "#121c2a",
+                      "surface-container-highest": "#d9e3f7",
+                      "secondary-fixed": "#6ffbbe",
+                      "inverse-primary": "#b8c4ff",
+                      "on-primary-fixed-variant": "#173bab",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "surface-container": "#e6eeff",
+                      "surface-tint": "#3755c3",
+                      "primary-fixed": "#dde1ff",
+                      "on-tertiary-container": "#ffa583",
+                      "outline-variant": "#c4c5d5",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#eff3ff",
+                      "on-primary-container": "#a8b8ff",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#872d00",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#00288e",
+                      "primary-container": "#1e40af",
+                      "surface-dim": "#d0daef",
+                      "tertiary": "#611e00",
+                      "surface": "#f9f9ff",
+                      "inverse-surface": "#273140",
+                      "tertiary-fixed": "#ffdbce",
+                      "on-tertiary-fixed": "#380d00",
+                      "outline": "#757684",
+                      "secondary-fixed-dim": "#4edea3",
+                      "tertiary-fixed-dim": "#ffb59a",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#001453",
+                      "surface-container-high": "#dee9fd",
+                      "on-error": "#ffffff",
+                      "surface-bright": "#f9f9ff",
+                      "on-surface": "#121c2a",
+                      "background": "#f9f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #121c2a; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .signature-gradient { background: linear-gradient(135deg, #1e40af 0%, #00288e 100%); }
+        .glass-overlay { background: rgba(249, 249, 255, 0.8); backdrop-filter: blur(20px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-7xl mx-auto">
+<div class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white font-headline">PlanForge</div>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Features</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Pricing</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Demo</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="signature-gradient text-on-primary px-6 py-2.5 rounded-lg font-medium hover:opacity-90 active:scale-95 transition-all">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-surface py-24 md:py-32">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h1 class="text-5xl md:text-6xl font-extrabold font-headline leading-tight tracking-tight text-on-surface">
+                        Organize Projects, Execute With <span class="text-primary">Clarity</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                        Modern project management for teams who move fast. Streamline workflows, track progress, and ship results without the overhead.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="signature-gradient text-on-primary px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                            Get Started Free
+                        </button>
+<button class="bg-surface-container-highest text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-surface-container-high transition-all">
+                            View Demo
+                        </button>
+</div>
+<div class="flex items-center gap-4 pt-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a young smiling professional woman in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSceVG3S-i3Z6QjMxEuxJBJIdQt5C59vHmgntVsjAI2B-exAJ-WppKEDfmL-DfhScmntZgJxHYSRX09TG_W1or0s0pdzIPSdUeitSjlysH3ihXO_gKspmQb2PUcX0p5X_dT2jbwiM4DGWZhZSdHfxE9y6-qIp8WZj8eJE6H_hse2Hk7AOpNOfzz0x9qpBj9IcYiLKXcmJePqijVUKt_ZKrjdAHWo1j1ZN14SE4RxVVVHzRTT7Wj6EcleBp_F2wnSMBua1r_GV6hlc"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a confident businessman in professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc9U4tkBD_MxO3YCnBNUPQzvFtNkg9GB5H5IiqQ3zNiSZHCeUovGlTyc6QLBTW5Z6pY9pmLt131AtQsFfv6bRVAT6i2BifRE7VfeGDwFbjm_ty4KZ6fs6-XY7j9Jh4b11Ic8NEZOxBmNKqqN86jkcicbQ47WA2r5YR7Uq0U-kXTvZryTh6Zf4BSOR105y6Aq8d61qiUCXiYyDHvdBSY1n5ECO6l4wKQhNRy5ml2VBYlErJRrekUBhSs7CSrLzI5sW1hQDMH4jtCO8"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a young man with glasses smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo4gSvJ6QWWsXODe21fsMpxPPYzoZ7LPFbUYUSfgxCTJnROXp00H1wqSv26zy-GTUdFlpmgcLhCkl8Q61xt-s0W0n5cTGlQgDb8YNaCoTb5jnup_eBmwQxXKjfSDHdCD2YF3dRAhSfQsp3-ek5umZItKjhRaj1mRGYZdqIOXr9ASHoJnImXMNVUba5xxZIA_UvWPMyt2RWAaBBLNak46FF1x9xZMXi7FwmmGdC0BDjlMfnKNBQ921TZW0bEHsEjJbjWaDZZli9wCs"/>
+</div>
+</div>
+<p class="text-sm font-medium text-on-surface-variant">Joined by <span class="text-primary font-bold">2,500+</span> teams this month</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-4 bg-primary-container/10 rounded-[2rem] blur-3xl"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden border border-outline-variant/15">
+<img class="w-full h-auto" data-alt="modern software dashboard interface showing project analytics, kanban boards, and team progress charts with clean typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCtbN2v2ItPGoL4ytIAUb7WqZfatppgga60CxIbBANDW-MEgSy8s8Tq323GN0zzjbVw5NYJb10wOoA1cDPhs_1PO4K1MUW0Ky0vlVDdL0YE24swl-EWKIrsNwVJLHDbM1IdmGLjtk27moAjoRxubDyYvWxYRfHepx_Vw9tQ8muEhIf1OEnc5ctyRg56mYUw2llVsqKFNi1Y_r8TjR5UgXCoqHNtoEdyVCSwHMNsU2QChqcXDW0Z8tsgZomS62wl8-dc4f9HJNrHgs"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section (Bento Grid Style) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-16">
+<h2 class="text-3xl font-bold font-headline text-on-surface mb-4">Precision Engineering for Productivity</h2>
+<p class="text-on-surface-variant max-w-2xl">Everything you need to manage complex projects without the complexity.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Feature 1 -->
+<div class="lg:col-span-2 group bg-surface-container-lowest p-8 rounded-2xl transition-all hover:bg-white hover:shadow-xl border-l-4 border-secondary">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined">group</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-3">Auth &amp; User Mgmt</h3>
+<p class="text-on-surface-variant leading-relaxed">Enterprise-grade security with role-based access control and seamless SSO integration for your entire organization.</p>
+</div>
+<!-- Feature 2 -->
+<div class="group bg-surface-container-lowest p-8 rounded-2xl transition-all hover:bg-white hover:shadow-xl border-l-4 border-primary">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">view_kanban</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-3">Kanban Task Board</h3>
+<p class="text-on-surface-variant leading-relaxed">Visualize workflow with drag-and-drop ease and powerful filtering.</p>
+</div>
+<!-- Feature 3 -->
+<div class="group bg-surface-container-lowest p-8 rounded-2xl transition-all hover:bg-white hover:shadow-xl border-l-4 border-tertiary">
+<div class="w-12 h-12 bg-tertiary-fixed flex items-center justify-center mb-6 text-tertiary">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-3">Project Management</h3>
+<p class="text-on-surface-variant leading-relaxed">Centralize documentation, timelines, and dependencies in one place.</p>
+</div>
+<!-- Feature 4 (Large) -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col md:flex-row items-center border-l-4 border-primary">
+<div class="p-10 md:w-1/2">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="text-2xl font-bold font-headline mb-4">Dashboard &amp; Analytics</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">Real-time data visualization that helps you identify bottlenecks before they happen. track velocity, burn-down, and team capacity effortlessly.</p>
+<a class="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all" href="#">
+                                Explore Analytics <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="md:w-1/2 h-full min-h-[300px] w-full">
+<img class="w-full h-full object-cover" data-alt="close up of a professional data analytics dashboard with colorful line charts and metric cards" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK3VdRxWAo2FQ7jiP0P4LIXO4WTMWdf5PMhEIMCkpdWWLKStZG3auy6EB0fYbcK4ERSjwMko9T3gpH4MEMuPMBmvSVg6nTZX1xPyPeMFKOg1yGMDUAhjMsuQMh_TZRVHGPiL3Cac9puF6cNRvvqq0coE-Ln-fxzS-EndG6_ZXUG_2hkhAfKhjGENsE2RZuqKX75EPN69VOx-2OlXzPCiBFTNpNhvWQbH8uWqTYLSh8L4Ary6D_-vDCIoQ7hjOwT-psh1nbF8ZqrE0"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-extrabold font-headline text-on-surface mb-6">Scalable Plans for Every Stage</h2>
+<!-- Billing Toggle -->
+<div class="flex items-center justify-center gap-4">
+<span class="text-sm font-medium text-on-surface-variant">Monthly</span>
+<button class="w-12 h-6 bg-primary rounded-full relative p-1 transition-colors">
+<div class="w-4 h-4 bg-white rounded-full translate-x-6"></div>
+</button>
+<span class="text-sm font-medium text-on-surface">Annual <span class="text-secondary font-bold ml-1">Save 20%</span></span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Starter -->
+<div class="bg-surface-container-lowest p-10 rounded-2xl flex flex-col transition-transform hover:-translate-y-2">
+<div class="mb-8">
+<h3 class="text-lg font-bold font-headline text-on-surface mb-2">Starter</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface">$0</span>
+<span class="text-on-surface-variant">/mo</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Up to 5 users
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Basic Kanban Boards
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                2GB Storage
+                            </li>
+</ul>
+<button class="w-full py-3 rounded-lg font-bold border-2 border-primary-container text-primary hover:bg-surface-container transition-colors">Get Started</button>
+</div>
+<!-- Pro -->
+<div class="bg-surface-container-lowest p-10 rounded-2xl flex flex-col transition-transform hover:-translate-y-2 relative border-2 border-primary shadow-2xl scale-105">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-on-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</div>
+<div class="mb-8">
+<h3 class="text-lg font-bold font-headline text-primary mb-2">Pro</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface">$24</span>
+<span class="text-on-surface-variant">/mo</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Unlimited users
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Advanced Automations
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Custom Dashboards
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Priority Support
+                            </li>
+</ul>
+<button class="w-full py-3 rounded-lg font-bold signature-gradient text-on-primary shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">Go Pro Now</button>
+</div>
+<!-- Enterprise -->
+<div class="bg-surface-container-lowest p-10 rounded-2xl flex flex-col transition-transform hover:-translate-y-2">
+<div class="mb-8">
+<h3 class="text-lg font-bold font-headline text-on-surface mb-2">Enterprise</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface">Custom</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Unlimited Everything
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Dedicated Manager
+                            </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                                Custom SSO / SAML
+                            </li>
+</ul>
+<button class="w-full py-3 rounded-lg font-bold border-2 border-primary-container text-primary hover:bg-surface-container transition-colors">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-[0.03]"></div>
+<div class="max-w-4xl mx-auto px-8 text-center relative">
+<h2 class="text-4xl md:text-5xl font-extrabold font-headline mb-8">Ready to transform how your team works?</h2>
+<div class="space-y-6">
+<button class="signature-gradient text-on-primary px-12 py-5 rounded-lg font-bold text-xl hover:opacity-90 active:scale-95 transition-all shadow-2xl shadow-primary/30">
+                        Get Started Free
+                    </button>
+<p class="text-on-surface-variant font-medium">No credit card required. Cancel anytime.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 w-full py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-bold text-slate-900 dark:text-white font-headline mb-4">PlanForge</div>
+<p class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400">The last project management tool your team will ever need.</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Product</h4>
+<ul class="space-y-2">
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Features</a></li>
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Integrations</a></li>
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Company</h4>
+<ul class="space-y-2">
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">About Us</a></li>
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Careers</a></li>
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Privacy Policy</a></li>
+<li><a class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:underline transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-sm font-['Inter'] text-slate-500 dark:text-slate-400">© 2024 PlanForge Inc. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
