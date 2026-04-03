@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Save, Loader2, User, Lock, Bell, Palette } from "lucide-react";
+import { Save, Loader2, User, Lock, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,12 +16,24 @@ export default function SettingsPage() {
   const [message, setMessage] = useState("");
   const [profile, setProfile] = useState({ name: "", email: "" });
   const [passwords, setPasswords] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
+  const [notifPrefs, setNotifPrefs] = useState({ email: true, tasks: true, project: false });
 
   useEffect(() => {
     if (session?.user) {
       setProfile({ name: session.user.name || "", email: session.user.email || "" });
     }
   }, [session]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("notifPrefs");
+    if (stored) setNotifPrefs(JSON.parse(stored));
+  }, []);
+
+  function toggleNotif(key: keyof typeof notifPrefs) {
+    const next = { ...notifPrefs, [key]: !notifPrefs[key] };
+    setNotifPrefs(next);
+    localStorage.setItem("notifPrefs", JSON.stringify(next));
+  }
 
   async function saveProfile(e: React.FormEvent) {
     e.preventDefault();
@@ -161,18 +173,18 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-5">
-            {[
-              { label: "Email notifications", desc: "Receive email updates about your projects" },
-              { label: "Task assignments", desc: "Get notified when tasks are assigned to you" },
-              { label: "Project updates", desc: "Receive updates when project status changes" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center justify-between">
+            {([
+              { key: "email" as const, label: "Email notifications", desc: "Receive email updates about your projects" },
+              { key: "tasks" as const, label: "Task assignments", desc: "Get notified when tasks are assigned to you" },
+              { key: "project" as const, label: "Project updates", desc: "Receive updates when project status changes" },
+            ]).map((item) => (
+              <div key={item.key} className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">{item.label}</p>
                   <p className="text-xs text-muted-foreground">{item.desc}</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" defaultChecked={i < 2} className="sr-only peer" />
+                  <input type="checkbox" checked={notifPrefs[item.key]} onChange={() => toggleNotif(item.key)} className="sr-only peer" />
                   <div className="w-9 h-5 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-transparent after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary" />
                 </label>
               </div>
@@ -181,29 +193,7 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <Palette className="w-5 h-5 text-muted-foreground" />
-            <div>
-              <CardTitle className="text-lg font-display">Appearance</CardTitle>
-              <CardDescription>Customize the look and feel</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <Label className="font-medium">Theme</Label>
-            <div className="flex gap-3">
-              {["Light", "Dark", "System"].map((theme) => (
-                <button key={theme} className={`px-4 py-2 rounded-full text-sm transition-all ${theme === "Light" ? "gradient-primary text-white shadow-md shadow-primary/20" : "ghost-border hover:bg-muted/60"}`}>
-                  {theme}
-                </button>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+
     </div>
   );
 }

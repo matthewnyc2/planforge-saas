@@ -14,6 +14,14 @@ export async function PATCH(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const userId = (session.user as any).id;
+    const project = await prisma.task.findUnique({
+      where: { id: params.taskId },
+      include: { project: { select: { ownerId: true } } },
+    });
+    if (!project) return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    if (project.project.ownerId !== userId) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
     const body = await request.json();
 
     // Handle simple status update (from drag-and-drop or status buttons)
@@ -66,6 +74,14 @@ export async function DELETE(
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
+    const userId = (session.user as any).id;
+    const task = await prisma.task.findUnique({
+      where: { id: params.taskId },
+      include: { project: { select: { ownerId: true } } },
+    });
+    if (!task) return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    if (task.project.ownerId !== userId) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
     await prisma.task.delete({
       where: { id: params.taskId },

@@ -51,6 +51,11 @@ export async function PATCH(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const userId = (session.user as any).id;
+    const existing = await prisma.project.findUnique({ where: { id: params.projectId } });
+    if (!existing) return NextResponse.json({ error: "Project not found" }, { status: 404 });
+    if (existing.ownerId !== userId) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
     const body = await request.json();
     const data = projectSchema.partial().parse(body);
 
@@ -77,6 +82,11 @@ export async function DELETE(
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
+    const userId = (session.user as any).id;
+    const existing = await prisma.project.findUnique({ where: { id: params.projectId } });
+    if (!existing) return NextResponse.json({ error: "Project not found" }, { status: 404 });
+    if (existing.ownerId !== userId) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
     await prisma.project.delete({
       where: { id: params.projectId },

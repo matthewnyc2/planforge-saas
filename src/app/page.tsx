@@ -52,7 +52,7 @@ export default function LandingPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 sm:pt-32 sm:pb-40">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-primary/5 text-primary rounded-full px-5 py-2 text-sm font-medium mb-8">
-              <Zap className="w-4 h-4" />Now in Public Beta
+              <Zap className="w-4 h-4" />Portfolio Demo
             </div>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-display mb-8 leading-[1.1]">
               Project management{" "}
@@ -234,7 +234,7 @@ export default function LandingPage() {
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display mb-6">Ready to get organized?</h2>
-          <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">Join thousands of teams already using PlanForge to manage projects and ship products faster.</p>
+          <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">Get organized today. PlanForge gives your team a clear view of every project, every task, and every deadline.</p>
           <Link href="/register">
             <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg text-base px-8 rounded-full gradient-primary-none" style={{ background: 'white', color: 'hsl(267 100% 35%)' }}>
               Start Free Today <ArrowRight className="ml-2 w-4 h-4" />
