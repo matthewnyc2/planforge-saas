@@ -1,188 +1,178 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { FolderOpen, Plus, Trash2, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getPriorityColor } from "@/lib/utils";
+import { Search, Plus, MoreVertical, Folder, Users, Calendar, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
-interface Project {
-  id: string;
-  name: string;
-  description: string | null;
-  status: string;
-  priority: string;
-  color: string;
-  createdAt: string;
-  tasks: { id: string; status: string }[];
-}
-
-const colors = ["#6366f1", "#ec4899", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4", "#6b7280"];
+const projects = [
+  {
+    id: 1,
+    name: 'Design System v2.0',
+    description: 'Complete redesign of our UI component library with improved accessibility',
+    progress: 65,
+    tasks: { total: 18, done: 12 },
+    team: 4,
+    dueDate: 'Mar 15',
+    priority: 'high',
+    color: 'from-blue-500 to-blue-600',
+    members: ['🧑', '👩', '🧑', '👨']
+  },
+  {
+    id: 2,
+    name: 'Mobile App Redesign',
+    description: 'Modern mobile experience with improved navigation and performance',
+    progress: 42,
+    tasks: { total: 19, done: 8 },
+    team: 3,
+    dueDate: 'Apr 1',
+    priority: 'high',
+    color: 'from-purple-500 to-purple-600',
+    members: ['👩', '🧑', '👨']
+  },
+  {
+    id: 3,
+    name: 'Brand Update',
+    description: 'Refresh brand identity with new color palette and typography',
+    progress: 88,
+    tasks: { total: 17, done: 15 },
+    team: 2,
+    dueDate: 'Feb 28',
+    priority: 'medium',
+    color: 'from-green-500 to-green-600',
+    members: ['🧑', '👩']
+  },
+  {
+    id: 4,
+    name: 'API Migration',
+    description: 'Migrate legacy API endpoints to new GraphQL architecture',
+    progress: 25,
+    tasks: { total: 24, done: 6 },
+    team: 3,
+    dueDate: 'May 10',
+    priority: 'medium',
+    color: 'from-orange-500 to-orange-600',
+    members: ['👨', '🧑', '👩']
+  },
+]
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [search, setSearch] = useState("");
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({ name: "", description: "", priority: "medium", color: "#6366f1" });
+  const [search, setSearch] = useState('')
 
-  useEffect(() => { fetchProjects(); }, []);
-
-  async function fetchProjects() {
-    const res = await fetch("/api/projects");
-    if (res.ok) setProjects(await res.json());
-    setLoading(false);
-  }
-
-  async function createProject(e: React.FormEvent) {
-    e.preventDefault();
-    const res = await fetch("/api/projects", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    if (res.ok) {
-      setDialogOpen(false);
-      setFormData({ name: "", description: "", priority: "medium", color: "#6366f1" });
-      fetchProjects();
-    }
-  }
-
-  async function deleteProject(id: string) {
-    if (!confirm("Delete this project and all its tasks?")) return;
-    await fetch(`/api/projects/${id}`, { method: "DELETE" });
-    fetchProjects();
-  }
-
-  const filtered = projects.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
-
-  if (loading) return (
-    <div className="flex items-center justify-center h-64">
-      <div className="animate-spin w-8 h-8 rounded-full" style={{ border: '3px solid hsl(var(--muted))', borderTopColor: 'hsl(var(--primary))' }} />
-    </div>
-  );
+  const filteredProjects = projects.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  )
 
   return (
-    <div>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
-        <div>
-          <h1 className="text-2xl font-bold font-display">Projects</h1>
-          <p className="text-muted-foreground mt-1">{projects.length} project{projects.length !== 1 ? "s" : ""}</p>
-        </div>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild>
-            <Button><Plus className="w-4 h-4 mr-2" />New Project</Button>
-          </DialogTrigger>
-          <DialogContent className="rounded-2xl">
-            <DialogHeader>
-              <DialogTitle className="font-display">Create Project</DialogTitle>
-              <DialogDescription>Add a new project to organize your tasks.</DialogDescription>
-            </DialogHeader>
-            <form onSubmit={createProject} className="space-y-5">
-              <div className="space-y-2">
-                <Label className="font-medium">Project Name</Label>
-                <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="My new project" required className="rounded-xl" />
-              </div>
-              <div className="space-y-2">
-                <Label className="font-medium">Description</Label>
-                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="What is this project about?" className="rounded-xl" />
-              </div>
-              <div className="space-y-2">
-                <Label className="font-medium">Priority</Label>
-                <Select value={formData.priority} onValueChange={(v) => setFormData({ ...formData, priority: v })}>
-                  <SelectTrigger className="rounded-xl"><SelectValue /></SelectTrigger>
-                  <SelectContent className="rounded-xl">
-                    <SelectItem value="low">Low</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="high">High</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label className="font-medium">Color</Label>
-                <div className="flex gap-2.5">
-                  {colors.map((c) => (
-                    <button key={c} type="button" onClick={() => setFormData({ ...formData, color: c })}
-                      className={`w-8 h-8 rounded-full transition-all ${formData.color === c ? "ring-2 ring-primary ring-offset-2 scale-110" : "opacity-70 hover:opacity-100"}`}
-                      style={{ backgroundColor: c }} />
-                  ))}
-                </div>
-              </div>
-              <Button type="submit" className="w-full">Create Project</Button>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="border-b border-gray-200 bg-white sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
+              <p className="text-gray-600">Manage all your projects and tasks</p>
+            </div>
+            <Link href="/dashboard/projects/new" className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all flex items-center gap-2">
+              <Plus className="w-4 h-4" />
+              New Project
+            </Link>
+          </div>
 
-      <div className="mb-8">
-        <div className="relative max-w-sm">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input placeholder="Search projects..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-10 rounded-xl" />
+          {/* Search and Filter */}
+          <div className="flex items-center gap-4">
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-4 top-3 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-12 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+              />
+            </div>
+            <button className="px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+              Filter
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((project) => {
-          const total = project.tasks.length;
-          const done = project.tasks.filter((t) => t.status === "done").length;
-          const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+      {/* Projects Grid */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {filteredProjects.length === 0 ? (
+          <div className="text-center py-12">
+            <Folder className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600 font-medium">No projects found</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project) => (
+              <Link key={project.id} href={`/dashboard/projects/${project.id}`}>
+                <div className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer h-full flex flex-col">
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="font-bold text-gray-900 text-lg mb-1">{project.name}</h3>
+                      <p className="text-sm text-gray-600">{project.description}</p>
+                    </div>
+                    <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                      <MoreVertical className="w-4 h-4 text-gray-400" />
+                    </button>
+                  </div>
 
-          return (
-            <Card key={project.id} className="group hover:shadow-lg hover:shadow-primary/5 transition-all duration-200">
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between">
-                  <Link href={`/dashboard/projects/${project.id}`} className="flex items-center gap-3 flex-1">
-                    <div className="w-3.5 h-3.5 rounded-full flex-shrink-0 shadow-sm" style={{ backgroundColor: project.color }} />
-                    <CardTitle className="text-base hover:text-primary transition-colors">{project.name}</CardTitle>
-                  </Link>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className={`rounded-full ${getPriorityColor(project.priority)}`}>{project.priority}</Badge>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive rounded-lg" onClick={() => deleteProject(project.id)}>
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                  {/* Progress Bar */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-semibold text-gray-600">Progress</span>
+                      <span className="text-xs font-bold text-gray-900">{project.progress}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full bg-gradient-to-r ${project.color} transition-all duration-500`}
+                        style={{ width: `${project.progress}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Tasks and Stats */}
+                  <div className="grid grid-cols-3 gap-4 mb-4 pb-4 border-b border-gray-100">
+                    <div>
+                      <p className="text-xs text-gray-600">Tasks</p>
+                      <p className="font-bold text-gray-900">{project.tasks.done}/{project.tasks.total}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600">Team</p>
+                      <p className="font-bold text-gray-900">{project.team}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600">Due</p>
+                      <p className="font-bold text-gray-900 text-sm">{project.dueDate}</p>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between mt-auto">
+                    <div className="flex gap-1">
+                      {project.members.map((member, i) => (
+                        <div key={i} className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center text-sm">
+                          {member}
+                        </div>
+                      ))}
+                    </div>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                      project.priority === 'high'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-yellow-100 text-yellow-700'
+                    }`}>
+                      {project.priority === 'high' ? '🔴 High' : '🟡 Medium'}
+                    </span>
                   </div>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <Link href={`/dashboard/projects/${project.id}`}>
-                  {project.description && <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{project.description}</p>}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">{done} / {total} tasks</span>
-                      <span className="font-medium font-display">{progress}%</span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full gradient-primary rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
-                    </div>
-                  </div>
-                </Link>
-              </CardContent>
-            </Card>
-          );
-        })}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
-
-      {filtered.length === 0 && projects.length > 0 && (
-        <Card><CardContent className="p-16 text-center"><p className="text-muted-foreground">No projects match your search.</p></CardContent></Card>
-      )}
-
-      {projects.length === 0 && (
-        <Card>
-          <CardContent className="p-16 text-center">
-            <FolderOpen className="w-12 h-12 text-muted-foreground/40 mx-auto mb-5" />
-            <h3 className="text-lg font-semibold font-display mb-2">No projects yet</h3>
-            <p className="text-muted-foreground mb-6">Create your first project to start managing tasks.</p>
-            <Button onClick={() => setDialogOpen(true)}><Plus className="w-4 h-4 mr-2" />Create Project</Button>
-          </CardContent>
-        </Card>
-      )}
     </div>
-  );
+  )
 }
